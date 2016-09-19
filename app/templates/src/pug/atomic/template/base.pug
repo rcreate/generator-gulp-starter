@@ -1,0 +1,15 @@
+include ../_atomic
+include ../../helper/_helper
+
+doctype
+html(lang='de')
+    head
+        meta(name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0,width=device-width")
+        meta(charset="utf-8")
+        title <%= appName %>
+        meta(name="description" content="<%= appDescription %>")
+        link(rel="stylesheet" href="/stylesheets/app.min.css")
+        script(src="/javascripts/app.min.js" defer)
+        block javascript
+    body
+        block page

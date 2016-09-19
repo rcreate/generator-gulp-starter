@@ -1,0 +1,42 @@
+{
+  "name": "generator-gulp-starter",
+  "version": "0.1.0",
+  "description": "Scaffold out a front-end web app by using rcreate/gulp-starter package as dependency to build it",
+  "license": "MIT",
+  "repository": "rcreate/generator-gulp-starter",
+  "author": "Ricardo Schmidt",
+  "main": "app/index.js",
+  "engines": {
+    "node": ">=4",
+    "npm": ">=3"
+  },
+  "scripts": {
+    "test": "No tests available"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "web",
+    "front-end",
+    "gulp",
+    "gulp-starter",
+    "sass",
+    "less",
+    "es2015",
+    "babel",
+    "webpack"
+  ],
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "underscore.string": "^3.1.1",
+    "wiredep": "^4.0.0",
+    "yeoman-assert": "^2.1.1",
+    "yeoman-generator": "^0.24.1",
+    "yosay": "^1.0.0"
+  },
+  "devDependencies": {
+  }
+}

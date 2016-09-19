@@ -1,0 +1,21 @@
+include ../../atomic/_atomic
+include ../../helper/_helper
+include ../Mixins/_mixins
+include ../Includes/_styleguide
+
+doctype
+html(lang='de')
+    head
+        meta(name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0,width=device-width")
+        meta(charset="utf-8")
+        title Metzler Stiftung - Gutes Vermögen
+        link(rel="stylesheet" href="/stylesheets/app.css")
+        link(rel="stylesheet" href="/stylesheets/styleguide/highlight.css")
+        script(src="/javascripts/app.js" defer)
+        script(src="/javascripts/styleguide.js" defer)
+        block javascript
+
+    body
+        block page
+            main
+                block main

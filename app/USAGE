@@ -1,0 +1,16 @@
+Description:
+    Creates a new front-end web application using rcreate/gulp-starter.
+
+Options:
+    Sass or Less: Include Sass oder Less
+    Bootstrap: Include Bootstrap or Bootstrap Sass if Sass is included
+
+Example:
+    yo gulp-starter
+
+    This will create:
+        gulpfile.js: Configuration for the task runner.
+        package.json: Development packages installed by npm.
+
+        src/: Your application files.
+        loaders/: Loaders for webpack

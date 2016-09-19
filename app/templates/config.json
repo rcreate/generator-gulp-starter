@@ -1,0 +1,102 @@
+{
+  "root": {
+    "src": "./../../src",
+    "dev": "./../../dist",
+    "dest": "./../../public",
+    "dist": "./../../build",
+    "loaders": "./../../loaders"
+  },
+
+  "loaders": {
+    "babel": "babel",
+    "imports": "imports"
+  },
+
+  "tasks": {
+    "browserSync": {
+      "server": {
+        "baseDir": "./../../dist"
+      }
+    },
+
+    "static": {
+      "src": "static",
+      "dest": "./"
+    },
+
+    "js": {
+      "src": "javascripts",
+      "dest": "javascripts",
+      "entries": {
+        "app": ["./app.js"],
+        "styleguide": ["./styleguide.js"]
+      },
+      "extensions": ["js", "json"],
+      "extractSharedJs": false,
+      "hotModuleReplacement": true,
+      "deployUncompressed": true
+    },
+
+    "css": {
+      "src": "stylesheets",
+      "dest": "stylesheets",
+      "autoprefixer": {
+        "browsers": ["last 3 version"]
+      },
+      "sass": {
+        "indentedSyntax": false
+      },
+      "extensions": ["sass", "scss", "css"],
+      "excludeFolders": ["vendor", "mixins", "config", "base", "atomic", "sg-styles"],
+      "deployUncompressed": true
+    },
+
+    "jade": {
+      "src": "jade",
+      "dest": "./",
+      "dataFile": "data/global.json",
+      "htmlmin": {
+        "collapseWhitespace": true
+      },
+      "extensions": ["jade", "json"],
+      "excludeFolders": ["atomic", "helper", "data"]
+    },
+
+    "images": {
+      "src": "images",
+      "dest": "images",
+      "extensions": ["jpg", "png", "svg", "gif"]
+    },
+
+    "fonts": {
+      "src": "fonts",
+      "dest": "fonts",
+      "extensions": ["woff2", "woff", "eot", "ttf", "svg"]
+    },
+
+    "iconFont": {
+      "src": "icons",
+      "dest": "fonts",
+      "sassDest": "generated",
+      "extensions": ["woff2", "woff", "eot", "ttf", "svg"]
+    },
+
+    "updateHtml": {
+      "src": "./",
+      "dest": "./"
+    },
+
+    "styleguide": {
+      "src": "stylesheets",
+      "dest": "../public/styleguide",
+      "extensions": ["sass", "scss", "css"],
+      "title": "SDV Relaunch - Styleguide",
+      "entry": "./app.sass",
+      "overview": "../README.md"
+    },
+
+    "production": {
+      "rev": false
+    }
+  }
+}

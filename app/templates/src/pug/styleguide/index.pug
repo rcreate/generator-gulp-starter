@@ -1,0 +1,14 @@
+extends ./Layouts/_styleguide
+
+block stylesheets
+    link(href='/stylesheets/styleguide/app.min.css' rel='stylesheet')
+
+block page
+    .sg-main-wrapper
+        include ./Partials/header
+        .sg-iframe-wrapper
+            iframe#styleguide(name= 'styleguide' width= '100%' height= '100%' frameBorder= '0')
+        include ./Partials/footer
+
+block javascript
+    script(src='/javascripts/styleguide.min.js')
