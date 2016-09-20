@@ -1,15 +1,11 @@
-var $ = require("jquery")
-
 module.exports = function($target, options){
     "use strict";
 
     var self = this;
 
     this.init = function(){
-        alert('works!')
+        alert('It works!')
     }
 
-    $(function(){
-        self.init()
-    })
+    $(self.init)
 }

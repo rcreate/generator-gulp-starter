@@ -1,6 +1,5 @@
 window['jQuery'] = require('jquery')
 window['$'] = window['jQuery']
-require('bootstrap/dist/js/umd/dropdown')
 
 window['app'] = window.app || new function () {
     "use strict";

@@ -1,0 +1,9 @@
+// vendor styles
+@import "vendor-styles/vendor-styles";
+
+// predefined variables and mixins
+@import "config/config";
+@import "mixins/mixins";
+
+// styles for all atomic elements
+@import "atomic/atomic";

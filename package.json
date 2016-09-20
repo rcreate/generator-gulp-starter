@@ -1,21 +1,85 @@
 {
-  "name": "generator-gulp-starter",
-  "version": "0.1.0",
+  "_args": [
+    [
+      {
+        "raw": "github:rcreate/generator-gulp-starter#develop",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "github:rcreate/generator-gulp-starter#develop",
+        "spec": "github:rcreate/generator-gulp-starter#develop",
+        "type": "hosted",
+        "hosted": {
+          "type": "github",
+          "ssh": "git@github.com:rcreate/generator-gulp-starter.git#develop",
+          "sshUrl": "git+ssh://git@github.com/rcreate/generator-gulp-starter.git#develop",
+          "httpsUrl": "git+https://github.com/rcreate/generator-gulp-starter.git#develop",
+          "gitUrl": "git://github.com/rcreate/generator-gulp-starter.git#develop",
+          "shortcut": "github:rcreate/generator-gulp-starter#develop",
+          "directUrl": "https://raw.githubusercontent.com/rcreate/generator-gulp-starter/develop/package.json"
+        }
+      },
+      "C:\\workspace\\webs\\yo-gulp-starter"
+    ]
+  ],
+  "_from": "rcreate/generator-gulp-starter#develop",
+  "_id": "generator-gulp-starter@0.1.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/generator-gulp-starter",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "github:rcreate/generator-gulp-starter#develop",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "github:rcreate/generator-gulp-starter#develop",
+    "spec": "github:rcreate/generator-gulp-starter#develop",
+    "type": "hosted",
+    "hosted": {
+      "type": "github",
+      "ssh": "git@github.com:rcreate/generator-gulp-starter.git#develop",
+      "sshUrl": "git+ssh://git@github.com/rcreate/generator-gulp-starter.git#develop",
+      "httpsUrl": "git+https://github.com/rcreate/generator-gulp-starter.git#develop",
+      "gitUrl": "git://github.com/rcreate/generator-gulp-starter.git#develop",
+      "shortcut": "github:rcreate/generator-gulp-starter#develop",
+      "directUrl": "https://raw.githubusercontent.com/rcreate/generator-gulp-starter/develop/package.json"
+    }
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "git://github.com/rcreate/generator-gulp-starter.git#67c4c30bebbfbef8677d6e1d9ccccaaa4b177590",
+  "_shasum": "cc0b72d19006390924053c38242c791bb05b5975",
+  "_shrinkwrap": null,
+  "_spec": "github:rcreate/generator-gulp-starter#develop",
+  "_where": "C:\\workspace\\webs\\yo-gulp-starter",
+  "author": {
+    "name": "Ricardo Schmidt"
+  },
+  "bugs": {
+    "url": "https://github.com/rcreate/generator-gulp-starter/issues"
+  },
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "underscore.string": "^3.1.1",
+    "wiredep": "^4.0.0",
+    "yeoman-assert": "^2.1.1",
+    "yeoman-generator": "^0.24.1",
+    "yosay": "^1.0.0"
+  },
   "description": "Scaffold out a front-end web app by using rcreate/gulp-starter package as dependency to build it",
-  "license": "MIT",
-  "repository": "rcreate/generator-gulp-starter",
-  "author": "Ricardo Schmidt",
-  "main": "app/index.js",
+  "devDependencies": {},
   "engines": {
     "node": ">=4",
     "npm": ">=3"
   },
-  "scripts": {
-    "test": "No tests available"
-  },
   "files": [
     "app"
   ],
+  "gitHead": "67c4c30bebbfbef8677d6e1d9ccccaaa4b177590",
+  "homepage": "https://github.com/rcreate/generator-gulp-starter#readme",
   "keywords": [
     "yeoman-generator",
     "web",
@@ -28,15 +92,18 @@
     "babel",
     "webpack"
   ],
-  "dependencies": {
-    "chalk": "^1.0.0",
-    "mkdirp": "^0.5.1",
-    "underscore.string": "^3.1.1",
-    "wiredep": "^4.0.0",
-    "yeoman-assert": "^2.1.1",
-    "yeoman-generator": "^0.24.1",
-    "yosay": "^1.0.0"
+  "license": "MIT",
+  "main": "app/index.js",
+  "name": "generator-gulp-starter",
+  "optionalDependencies": {},
+  "readme": "# generator-gulp-starter\nYoeman generator for Gulp-Starter package\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcreate/generator-gulp-starter.git"
   },
-  "devDependencies": {
-  }
+  "scripts": {
+    "test": "No tests available"
+  },
+  "version": "0.1.0"
 }
