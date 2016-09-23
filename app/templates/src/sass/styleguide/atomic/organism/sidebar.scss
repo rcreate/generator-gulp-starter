@@ -1,0 +1,35 @@
+.styleguide-sidebar {
+    position: absolute;
+    bottom: 0;
+    z-index: 3;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    left: -100%;
+    height: calc(100vh - 54px);
+    transition: .3s left ease-in-out;
+
+    &.open {
+        left: 0;
+    }
+
+    ul {
+        @include list-unstyled();
+
+        li {
+            white-space: nowrap;
+        }
+
+        li > .nav-link {
+            &:hover {
+                background-color : #cccccc;
+                color            : #ffffff;
+                text-decoration : none;
+            }
+        }
+
+        li > ul {
+            border-top: 1px solid #cccccc;
+            padding-left: 10px;
+        }
+    }
+}

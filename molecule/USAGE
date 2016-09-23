@@ -1,0 +1,11 @@
+Description:
+    Creates a new molecule
+
+Options:
+    tba
+
+Example:
+    yo gulp-starter:molecule
+
+    This will create:
+        tba

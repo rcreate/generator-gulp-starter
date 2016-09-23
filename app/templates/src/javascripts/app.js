@@ -22,7 +22,7 @@ window['app'] = window.app || new function () {
     var loadModule = function (name, selector) {
         var $target = $(selector)
         if( $target.length ) {
-            var module = require('./modules/'+name)
+            var module = require('./app/'+name)
             instances[name] = {}
             instances[name][selector.toString()] = new module($target)
         }

@@ -50,9 +50,11 @@
       "src": "javascripts",
       "dest": "javascripts",
       "entries": {
-        "app": ["./app.js"]
+        "app": ["./app.js"],
+        "shared": ["./shared.js"],
+        "styleguide": ["./styleguide.js"]
       },
-      "extensions": ["js", "json"],
+      "extensions": ["js"],
       "extractSharedJs": false,
       "hotModuleReplacement": true,
       "deployUncompressed": true
@@ -78,7 +80,7 @@
       "type": "less",
       "extensions": "less",
       <% } %>
-      "excludeFolders": ["vendor-styles", "mixins", "config", "base", "atomic"],
+      "excludeFolders": ["app", "shared", "styleguide"],
       "deployUncompressed": true
     },
     <% } %>
@@ -87,7 +89,10 @@
     "pug": {
       "src": "pug",
       "dest": "./",
-      "dataFile": "data/global.json",
+      "data": [
+        "styleguide/data/global.json",
+        "app/data/global.json"
+      ],
       "htmlmin": {},
       "extensions": ["pug", "json"],
       "excludeFolders": ["atomic", "helper", "data"]

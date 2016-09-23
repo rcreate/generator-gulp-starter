@@ -1,0 +1,19 @@
+extends base
+
+block includes
+    include ../../helper/_helper
+    include ../../../app/atomic/_atomic
+    include ../../../app/helper/_helper
+
+block assets
+    link(rel="stylesheet" href="/stylesheets/app.min.css")
+    link(rel="stylesheet" href="/stylesheets/shared.min.css")
+    script(src="/javascripts/app.min.js" defer)
+    script(src="/javascripts/shared.min.js" defer)
+
+block main
+    .container
+        h1
+            block headline
+
+    block modules

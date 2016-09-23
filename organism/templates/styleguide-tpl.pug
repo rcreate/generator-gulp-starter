@@ -1,0 +1,10 @@
+extends ../../atomic/template/modules
+
+block headline
+    | <%= category %>
+
+block modules
+    .container
+        +<%= id %>()
+        +highlight
+          +<%= id %>()

@@ -24,10 +24,10 @@ module.exports = generators.Base.extend({
           type: Boolean
       });
 
-      this.answers = {
+      this.config.set({
           enableStaticFiles: false,
           enableAssetRevisioning: false
-      };
+      });
   },
 
   initializing: function () {
@@ -216,18 +216,18 @@ module.exports = generators.Base.extend({
       return this.prompt(prompts)
                  .then(
                      function (answers) {
-                         extend(this.answers, answers);
+                         this.config.set(answers)
                      }.bind(this)
                  );
   },
 
   writing: {
     packageJSON: function () {
-        var answers = this.answers;
-        if (this.answers.bootstrapVersion.indexOf('4') === 0) {
+        var answers = this.config.getAll();
+        if (answers.bootstrapVersion.indexOf('4') === 0) {
             answers["bootstrapName"] = "bootstrap";
-        } else if (this.answers.bootstrapVersion.indexOf('3') === 0) {
-            answers["bootstrapName"] = "bootstrap" + ( this.answers.cssPreprocessor === 'less' ? '' : '-sass' );
+        } else if (answers.bootstrapVersion.indexOf('3') === 0) {
+            answers["bootstrapName"] = "bootstrap" + ( answers.cssPreprocessor === 'less' ? '' : '-sass' );
         }
 
         this.fs.copyTpl(
@@ -241,7 +241,7 @@ module.exports = generators.Base.extend({
         this.fs.copyTpl(
               this.templatePath('_config.json'),
               this.destinationPath('config.json'),
-              this.answers
+              this.config.getAll()
         );
     },
 
@@ -259,8 +259,23 @@ module.exports = generators.Base.extend({
         );
     },
 
+    eslint: function () {
+        this.fs.copy(
+            this.templatePath('_eslintrc.js'),
+            this.destinationPath('.eslintrc.js')
+        );
+    },
+
+    htaccess: function () {
+        this.fs.copy(
+            this.templatePath('_htaccess'),
+            this.destinationPath('.htaccess')
+        );
+    },
+
     pug: function () {
-        if (!this.answers.enablePug) {
+        var answers = this.config.getAll();
+        if (!answers.enablePug) {
             return;
         }
 
@@ -272,30 +287,37 @@ module.exports = generators.Base.extend({
         );
 
         this.fs.copyTpl(
-            this.templatePath('src/pug/atomic/template/base.pug'),
-            this.destinationPath('src/pug/atomic/template/base.pug'),
-            this.answers
+            this.templatePath('src/pug/app/atomic/template/base.pug'),
+            this.destinationPath('src/pug/app/atomic/template/base.pug'),
+            answers
+        );
+
+        this.fs.copyTpl(
+            this.templatePath('src/pug/styleguide/atomic/template/base.pug'),
+            this.destinationPath('src/pug/styleguide/atomic/template/base.pug'),
+            answers
         );
     },
 
     javascript: function () {
-        if (!this.answers.enableJavascript) {
+        var answers = this.config.getAll();
+        if (!answers.enableJavascript) {
             return;
         }
 
         mkdirp('loaders');
 
-        if (this.answers.useBabel) {
+        if (answers.useBabel) {
             this.fs.copyTpl(
                 this.templatePath('loaders/babel.js'),
                 this.destinationPath('loaders/babel.js'),
-                this.answers
+                answers
             );
         } else {
             this.fs.copyTpl(
                 this.templatePath('loaders/imports.js'),
                 this.destinationPath('loaders/imports.js'),
-                this.answers
+                answers
             );
         }
 
@@ -308,11 +330,12 @@ module.exports = generators.Base.extend({
     },
 
     stylesheet: function () {
-        if (!this.answers.enableStylesheet) {
+        var answers = this.config.getAll();
+        if (!answers.enableStylesheet) {
             return;
         }
 
-        var type = this.answers.cssPreprocessor;
+        var type = answers.cssPreprocessor;
         var ext = type;
         if (ext === "sass") {
             ext = "scss";
@@ -326,43 +349,68 @@ module.exports = generators.Base.extend({
         );
 
         this.fs.copyTpl(
-            this.templatePath('src/' + type + '/config/_config.' + ext),
-            this.destinationPath('src/stylesheets/config/_config.' + ext),
-            this.answers
+            this.templatePath('src/' + type + '/app/config/_config.' + ext),
+            this.destinationPath('src/stylesheets/app/config/_config.' + ext),
+            answers
         );
 
         this.fs.copyTpl(
-            this.templatePath('src/' + type + '/vendor-styles/_vendor-styles.' + ext),
-            this.destinationPath('src/stylesheets/vendor-styles/_vendor-styles.' + ext),
-            this.answers
+            this.templatePath('src/' + type + '/styleguide/config/_config.' + ext),
+            this.destinationPath('src/stylesheets/styleguide/config/_config.' + ext),
+            answers
+        );
+
+        this.fs.copyTpl(
+            this.templatePath('src/' + type + '/app/vendor/_vendor.' + ext),
+            this.destinationPath('src/stylesheets/app/vendor/_vendor.' + ext),
+            answers
+        );
+
+        this.fs.copyTpl(
+            this.templatePath('src/' + type + '/styleguide/vendor/_vendor.' + ext),
+            this.destinationPath('src/stylesheets/styleguide/vendor/_vendor.' + ext),
+            answers
         );
 
         var sourceFile;
-        if (this.answers.bootstrapVersion.indexOf('4') === 0) {
-            sourceFile = 'v' + this.answers.bootstrapVersion + '.' + ext;
-        } else if (this.answers.bootstrapVersion.indexOf('3') === 0) {
+        if (answers.bootstrapVersion.indexOf('4') === 0) {
+            sourceFile = 'v' + answers.bootstrapVersion + '.' + ext;
+        } else if (answers.bootstrapVersion.indexOf('3') === 0) {
             sourceFile = 'v3.' + ext;
         }
 
         if (sourceFile) {
             this.fs.copyTpl(
                 this.templatePath('src/bootstrap/' + sourceFile),
-                this.destinationPath('src/stylesheets/vendor-styles/bootstrap.' + ext),
-                this.answers
+                this.destinationPath('src/stylesheets/app/vendor/bootstrap.' + ext),
+                answers
+            );
+            this.fs.copyTpl(
+                this.templatePath('src/bootstrap/' + sourceFile),
+                this.destinationPath('src/stylesheets/styleguide/vendor/bootstrap.' + ext),
+                answers
             );
 
-            mkdirp('src/stylesheets/config/bootstrap');
+            mkdirp('src/stylesheets/app/config/bootstrap');
 
             this.fs.copyTpl(
                 this.templatePath('src/bootstrap/config/_bootstrap.' + ext),
-                this.destinationPath('src/stylesheets/config/bootstrap/_bootstrap.' + ext),
-                this.answers
+                this.destinationPath('src/stylesheets/app/config/bootstrap/_bootstrap.' + ext),
+                answers
+            );
+
+            mkdirp('src/stylesheets/styleguide/config/bootstrap');
+
+            this.fs.copyTpl(
+                this.templatePath('src/bootstrap/config/_bootstrap.' + ext),
+                this.destinationPath('src/stylesheets/styleguide/config/bootstrap/_bootstrap.' + ext),
+                answers
             );
         }
     },
 
     images: function() {
-        if( !this.answers.enableImages ) {
+        if( !this.config.getAll().enableImages ) {
             return;
         }
 
@@ -374,7 +422,7 @@ module.exports = generators.Base.extend({
     },
 
     fonts: function() {
-        if( !this.answers.enableFonts ) {
+        if( !this.config.getAll().enableFonts ) {
             return;
         }
 
@@ -386,7 +434,7 @@ module.exports = generators.Base.extend({
     },
 
     iconFont: function() {
-        if( !this.answers.enableIconFont ) {
+        if( !this.config.getAll().enableIconFont ) {
             return;
         }
 
@@ -398,7 +446,7 @@ module.exports = generators.Base.extend({
     },
 
     staticFiles: function() {
-        if( !this.answers.enableStaticFiles ) {
+        if( !this.config.getAll().enableStaticFiles ) {
             return;
         }
 

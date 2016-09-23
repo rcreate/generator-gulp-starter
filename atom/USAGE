@@ -1,0 +1,11 @@
+Description:
+    Creates a new atom
+
+Options:
+    tba
+
+Example:
+    yo gulp-starter:atom
+
+    This will create:
+        tba

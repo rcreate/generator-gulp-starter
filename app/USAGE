@@ -9,8 +9,8 @@ Example:
     yo gulp-starter
 
     This will create:
+        gulpfile.js: Configuration for the task runner.
         package.json: Development packages installed by npm.
-        config.json: Configuration for gulp-starter package.
 
         src/: Your application files.
-        loaders/: Loaders for webpack.
+        loaders/: Loaders for webpack
