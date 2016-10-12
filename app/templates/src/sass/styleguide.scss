@@ -1,6 +1,10 @@
 // predefined variables and mixins
-@import "styleguide/config/config";
+@import "../../node_modules/styleguide/src/stylesheets/config/config";
+// Metzler-Theme Variablen
+@import "styleguide/theme-variables";
 // vendor styles
-@import "styleguide/vendor/vendor";
+@import "../../node_modules/styleguide/src/stylesheets/vendor/vendor";
 // styles for all atomic elements
-@import "styleguide/atomic/atomic";
+@import "../../node_modules/styleguide/src/stylesheets/atomic/atomic";
+// Metzler-Theme
+@import "styleguide/theme";

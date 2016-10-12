@@ -21,7 +21,8 @@
     "dist-upgrade": "cd ./node_modules/gulp-starter && npm run-script dist-upgrade"
   },
   "devDependencies": {
-    "gulp-starter": "rcreate/gulp-starter#develop"
+    "gulp-starter": "rcreate/gulp-starter#develop",
+    "styleguide": "rcreate/styleguide"
   },
   "dependencies": {
     "<%= bootstrapName %>": "<%= bootstrapVersion %>",
