@@ -291,12 +291,6 @@ module.exports = generators.Base.extend({
             this.destinationPath('src/pug/app/atomic/template/base.pug'),
             answers
         );
-
-        this.fs.copyTpl(
-            this.templatePath('src/pug/styleguide/atomic/template/base.pug'),
-            this.destinationPath('src/pug/styleguide/atomic/template/base.pug'),
-            answers
-        );
     },
 
     javascript: function () {
@@ -355,20 +349,8 @@ module.exports = generators.Base.extend({
         );
 
         this.fs.copyTpl(
-            this.templatePath('src/' + type + '/styleguide/config/_config.' + ext),
-            this.destinationPath('src/stylesheets/styleguide/config/_config.' + ext),
-            answers
-        );
-
-        this.fs.copyTpl(
             this.templatePath('src/' + type + '/app/vendor/_vendor.' + ext),
             this.destinationPath('src/stylesheets/app/vendor/_vendor.' + ext),
-            answers
-        );
-
-        this.fs.copyTpl(
-            this.templatePath('src/' + type + '/styleguide/vendor/_vendor.' + ext),
-            this.destinationPath('src/stylesheets/styleguide/vendor/_vendor.' + ext),
             answers
         );
 
@@ -385,25 +367,12 @@ module.exports = generators.Base.extend({
                 this.destinationPath('src/stylesheets/app/vendor/bootstrap.' + ext),
                 answers
             );
-            this.fs.copyTpl(
-                this.templatePath('src/bootstrap/' + sourceFile),
-                this.destinationPath('src/stylesheets/styleguide/vendor/bootstrap.' + ext),
-                answers
-            );
 
             mkdirp('src/stylesheets/app/config/bootstrap');
 
             this.fs.copyTpl(
                 this.templatePath('src/bootstrap/config/_bootstrap.' + ext),
                 this.destinationPath('src/stylesheets/app/config/bootstrap/_bootstrap.' + ext),
-                answers
-            );
-
-            mkdirp('src/stylesheets/styleguide/config/bootstrap');
-
-            this.fs.copyTpl(
-                this.templatePath('src/bootstrap/config/_bootstrap.' + ext),
-                this.destinationPath('src/stylesheets/styleguide/config/bootstrap/_bootstrap.' + ext),
                 answers
             );
         }
