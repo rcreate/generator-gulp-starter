@@ -22,7 +22,10 @@
     "npm": ">=3"
   },
   "files": [
-    "app"
+    "app",
+    "atom",
+    "molecule",
+    "organism"
   ],
   "gitHead": "67c4c30bebbfbef8677d6e1d9ccccaaa4b177590",
   "homepage": "https://github.com/rcreate/generator-gulp-starter#readme",
