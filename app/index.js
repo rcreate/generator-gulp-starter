@@ -138,6 +138,12 @@ module.exports = generators.Base.extend({
           },
           {
               type: 'confirm',
+              name: 'enableStyleguide',
+              message: 'Do you want to add a Styleguide to your Project?',
+              default: true
+          },
+          {
+              type: 'confirm',
               name: 'cssAutoprefixer',
               message: 'Do you want to enable auto prefixing of your css rules?',
               default: true
@@ -293,7 +299,7 @@ module.exports = generators.Base.extend({
             answers
         );
 
-        if( answers.cssPreprocessor === 'sass' ) {
+        if( answers.cssPreprocessor === 'sass' && answers.enableStyleguide === true ) {
             mkdirp('src/pug/styleguide');
 
             this.fs.copy(
@@ -325,16 +331,26 @@ module.exports = generators.Base.extend({
             );
         }
 
-        mkdirp('src/javascripts');
+        mkdirp('src/javascripts/app');
 
         this.fs.copy(
-            this.templatePath('src/javascripts') + '/**/*.*',
-            this.destinationPath('src/javascripts')
+            this.templatePath('src/javascripts/app') + '/**/*.*',
+            this.destinationPath('src/javascripts/app')
+        );
+        this.fs.copy(
+            this.templatePath('src/javascripts/app.js'),
+            this.destinationPath('src/javascripts/app.js')
         );
 
-        if( answers.cssPreprocessor === 'less' ) {
-            this.fs.delete(this.destinationPath('src/javascripts') + '/inject.js');
-            this.fs.delete(this.destinationPath('src/javascripts') + '/styleguide.js');
+        if( answers.cssPreprocessor === 'sass' && answers.enableStyleguide === true ) {
+            this.fs.copy(
+                this.templatePath('src/javascripts/inject.js'),
+                this.destinationPath('src/javascripts/inject.js')
+            );
+            this.fs.copy(
+                this.templatePath('src/javascripts/styleguide.js'),
+                this.destinationPath('src/javascripts/styleguide.js')
+            );
         }
     },
 
@@ -350,12 +366,33 @@ module.exports = generators.Base.extend({
             ext = "scss";
         }
 
-        mkdirp('src/stylesheets');
+        mkdirp('src/stylesheets/app');
 
         this.fs.copy(
-            this.templatePath('src/' + type) + '/**/*.*',
-            this.destinationPath('src/stylesheets')
+            this.templatePath('src/' + type + '/app') + '/**/*.*',
+            this.destinationPath('src/stylesheets/app')
         );
+        this.fs.copy(
+            this.templatePath('src/' + type + '/app.'+ext),
+            this.destinationPath('src/stylesheets/app.'+ext)
+        );
+
+        if( answers.cssPreprocessor === 'sass' && answers.enableStyleguide === true ) {
+            mkdirp('src/stylesheets/styleguide');
+
+            this.fs.copy(
+                this.templatePath('src/' + type + '/styleguide') + '/**/*.*',
+                this.destinationPath('src/stylesheets/styleguide')
+            );
+            this.fs.copy(
+                this.templatePath('src/' + type + '/inject.'+ext),
+                this.destinationPath('src/stylesheets/inject.'+ext)
+            );
+            this.fs.copy(
+                this.templatePath('src/' + type + '/styleguide.'+ext),
+                this.destinationPath('src/stylesheets/styleguide.'+ext)
+            );
+        }
 
         this.fs.copyTpl(
             this.templatePath('src/' + type + '/app/config/_config.' + ext),

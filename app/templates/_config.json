@@ -3,15 +3,13 @@
     "src": "./../../src",
     "dev": "./../../dist",
     "dest": "./../../public",
-    "dist": "./../../build",
-    <% if( enableJavascript ) { %>"loaders": "./../../loaders"
-    <% } %>
+    "dist": "./../../build"
+    <% if( enableJavascript ) { %>,"loaders": "./../../loaders"<% } %>
   },
   <% if( enableJavascript ) { %>
   "loaders": {
     <% if( useBabel ) { %>"babel": "babel"
-    <% } else { %>"imports": "imports"
-    <% } %>
+    <% } else { %>"imports": "imports"<% } %>
   },
   <% } %>
 
@@ -51,7 +49,7 @@
       "dest": "javascripts",
       "entries": {
         "app": ["./app.js"]
-        <% if( cssPreprocessor === 'sass' ) { %>
+        <% if( cssPreprocessor === 'sass' && enableStyleguide === true ) { %>
         ,"shared": ["./inject.js"]
         ,"styleguide": ["./styleguide.js"]
         <% } %>
@@ -82,7 +80,7 @@
       "type": "less",
       "extensions": "less",
       <% } %>
-      "excludeFolders": ["app", "shared", "styleguide"],
+      "excludeFolders": ["app"<% if( cssPreprocessor === "sass" && enableStyleguide === true ) { %>, "shared", "styleguide"<% } %>],
       "deployUncompressed": true
     },
     <% } %>
@@ -93,7 +91,7 @@
       "dest": "./",
       "data": [
         "app/data/global.json"
-        <% if( cssPreprocessor === "sass" ) { %>
+        <% if( cssPreprocessor === "sass" && enableStyleguide === true ) { %>
         ,"styleguide/data/global.json"
         <% } %>
       ],

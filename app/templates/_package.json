@@ -22,11 +22,11 @@
   },
   "devDependencies": {
     "gulp-starter": "rcreate/gulp-starter#develop"
-    <% if( cssPreprocessor == 'sass' ) { %>,"styleguide": "rcreate/styleguide"<% } %>
+    <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"styleguide": "rcreate/styleguide"<% } %>
   },
   "dependencies": {
     "<%= bootstrapName %>": "<%= bootstrapVersion %>"
-    <% if( cssPreprocessor == 'sass' ) { %>,"highlightjs": "8.7.0"<% } %>
+    <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"highlightjs": "8.7.0"<% } %>
     ,"jquery": "^3.1.0"
   },
   "engines": {
