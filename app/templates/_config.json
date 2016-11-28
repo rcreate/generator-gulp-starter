@@ -50,11 +50,13 @@
       "src": "javascripts",
       "dest": "javascripts",
       "entries": {
-        "app": ["./app.js"],
-        "shared": ["./shared.js"],
-        "styleguide": ["./styleguide.js"]
+        "app": ["./app.js"]
+        <% if( cssPreprocessor === 'sass' ) { %>
+        ,"shared": ["./inject.js"]
+        ,"styleguide": ["./styleguide.js"]
+        <% } %>
       },
-      "extensions": ["js"],
+      "extensions": ["js","json"],
       "extractSharedJs": false,
       "hotModuleReplacement": true,
       "deployUncompressed": true
@@ -90,8 +92,10 @@
       "src": "pug",
       "dest": "./",
       "data": [
-        "styleguide/data/global.json",
         "app/data/global.json"
+        <% if( cssPreprocessor === "sass" ) { %>
+        ,"styleguide/data/global.json"
+        <% } %>
       ],
       "htmlmin": {},
       "extensions": ["pug", "json"],

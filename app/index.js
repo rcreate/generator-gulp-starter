@@ -122,12 +122,8 @@ module.exports = generators.Base.extend({
               message: 'Which version of Bootstrap do you want to use?',
               choices: [
                   {
-                      name: 'Bootstrap 4 alpha3 (experimental)',
-                      value: '4.0.0-alpha.3'
-                  },
-                  {
-                      name: 'Bootstrap 4 alpha2 (tested)',
-                      value: '4.0.0-alpha.2'
+                      name: 'Bootstrap 4 alpha4',
+                      value: '4.0.0-alpha.4'
                   },
                   {
                       name: 'Bootstrap 3 latest',
@@ -138,7 +134,7 @@ module.exports = generators.Base.extend({
                       value: false
                   }
               ],
-              default: '4.0.0-alpha.2'
+              default: '4.0.0-alpha.4'
           },
           {
               type: 'confirm',
@@ -199,7 +195,7 @@ module.exports = generators.Base.extend({
                   },
                   {
                       name: 'Chrome',
-                      value: 'google chrome'
+                      value: 'chrome'
                   },
                   {
                       name: 'Firefox',
@@ -279,11 +275,16 @@ module.exports = generators.Base.extend({
             return;
         }
 
-        mkdirp('src/pug');
+        mkdirp('src/pug/app');
 
         this.fs.copy(
-            this.templatePath('src/pug') + '/**/*.*',
+            this.templatePath('src/pug') + '/*.*',
             this.destinationPath('src/pug')
+        );
+
+        this.fs.copy(
+            this.templatePath('src/pug/app') + '/**/*.*',
+            this.destinationPath('src/pug/app')
         );
 
         this.fs.copyTpl(
@@ -291,6 +292,15 @@ module.exports = generators.Base.extend({
             this.destinationPath('src/pug/app/atomic/template/base.pug'),
             answers
         );
+
+        if( answers.cssPreprocessor === 'sass' ) {
+            mkdirp('src/pug/styleguide');
+
+            this.fs.copy(
+                this.templatePath('src/pug/styleguide') + '/**/*.*',
+                this.destinationPath('src/pug/styleguide')
+            );
+        }
     },
 
     javascript: function () {
@@ -321,6 +331,11 @@ module.exports = generators.Base.extend({
             this.templatePath('src/javascripts') + '/**/*.*',
             this.destinationPath('src/javascripts')
         );
+
+        if( answers.cssPreprocessor === 'less' ) {
+            this.fs.delete(this.destinationPath('src/javascripts') + '/inject.js');
+            this.fs.delete(this.destinationPath('src/javascripts') + '/styleguide.js');
+        }
     },
 
     stylesheet: function () {
@@ -430,7 +445,8 @@ module.exports = generators.Base.extend({
   install: function () {
       this.installDependencies({
           skipMessage: this.options['skip-install-message'],
-          skipInstall: this.options['skip-install']
+          skipInstall: this.options['skip-install'],
+          bower: false
       });
   },
 

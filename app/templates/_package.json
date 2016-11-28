@@ -21,13 +21,13 @@
     "dist-upgrade": "cd ./node_modules/gulp-starter && npm run-script dist-upgrade"
   },
   "devDependencies": {
-    "gulp-starter": "rcreate/gulp-starter#develop",
-    "styleguide": "rcreate/styleguide"
+    "gulp-starter": "rcreate/gulp-starter#develop"
+    <% if( cssPreprocessor == 'sass' ) { %>,"styleguide": "rcreate/styleguide"<% } %>
   },
   "dependencies": {
-    "<%= bootstrapName %>": "<%= bootstrapVersion %>",
-    "highlightjs": "8.7.0",
-    "jquery": "^3.1.0"
+    "<%= bootstrapName %>": "<%= bootstrapVersion %>"
+    <% if( cssPreprocessor == 'sass' ) { %>,"highlightjs": "8.7.0"<% } %>
+    ,"jquery": "^3.1.0"
   },
   "engines": {
     "node": ">=4"
