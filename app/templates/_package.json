@@ -21,8 +21,8 @@
     "dist-upgrade": "cd ./node_modules/gulp-starter && npm run-script dist-upgrade"
   },
   "devDependencies": {
-    "gulp-starter": "rcreate/gulp-starter#develop"
-    <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"styleguide": "rcreate/styleguide"<% } %>
+    "gulp-starter": "queoGmbH/gulp-starter#develop"
+    <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"styleguide": "queoGmbH/styleguide"<% } %>
   },
   "dependencies": {
     "<%= bootstrapName %>": "<%= bootstrapVersion %>"

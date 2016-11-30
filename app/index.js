@@ -240,9 +240,10 @@ module.exports = generators.Base.extend({
     },
 
     config: function () {
+        mkdirp('build_tools');
         this.fs.copyTpl(
-              this.templatePath('_config.json'),
-              this.destinationPath('config.json'),
+              this.templatePath('build_tools/_config.json'),
+              this.destinationPath('build_tools/config.json'),
               this.config.getAll()
         );
     },

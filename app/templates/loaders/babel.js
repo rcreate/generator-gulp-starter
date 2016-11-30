@@ -1,11 +1,10 @@
 var path = require('path')
-var config = require('../config')
 
-module.exports = function(webpack) {
+module.exports = function() {
     return {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: path.resolve(config.root.src, config.tasks.js.src),
+        include: path.resolve(GULP_CONFIG.root.src, GULP_CONFIG.tasks.js.src),
         query: {
             "presets": ["es2015", "stage-1"],
             "plugins": []

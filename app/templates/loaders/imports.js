@@ -1,6 +1,5 @@
 var path = require('path')
-var config = require('../config')
 
-module.exports = function(webpack) {
+module.exports = function() {
     return { test: /\.js$/, loader: 'imports?define=>false'}
 }
