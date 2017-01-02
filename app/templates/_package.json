@@ -21,7 +21,8 @@
     "dist-upgrade": "cd ./node_modules/queo-blendid && npm run-script dist-upgrade"
   },
   "devDependencies": {
-    "queo-blendid": "4.1.1"
+    "queo-blendid": "4.1.1",
+    "npm-sass-require": "0.1.0"
     <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"queo-styleguide": "1.0.0"<% } %>
   },
   "dependencies": {

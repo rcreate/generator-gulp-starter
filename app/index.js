@@ -162,12 +162,6 @@ module.exports = generators.Base.extend({
           },
           {
               type: 'confirm',
-              name: 'enableIconFont',
-              message: 'Do you want generate a icon font by combining all SVG files in your "src/icons" directory?',
-              default: false
-          },
-          {
-              type: 'confirm',
               name: 'watch',
               message: 'Do you want to have a watch task enabled?',
               default: true
@@ -240,10 +234,15 @@ module.exports = generators.Base.extend({
     },
 
     config: function () {
-        mkdirp('build_tools');
+        mkdirp('config');
         this.fs.copyTpl(
-              this.templatePath('build_tools/_config.json'),
-              this.destinationPath('build_tools/config.json'),
+              this.templatePath('config/_path-config.json'),
+              this.destinationPath('config/path-config.json'),
+              this.config.getAll()
+        );
+        this.fs.copyTpl(
+              this.templatePath('config/_task-config.js'),
+              this.destinationPath('config/task-config.js'),
               this.config.getAll()
         );
     },
@@ -452,18 +451,6 @@ module.exports = generators.Base.extend({
         this.fs.copy(
             this.templatePath('src/fonts') + '/**/*.*',
             this.destinationPath('src/fonts')
-        );
-    },
-
-    iconFont: function() {
-        if( !this.config.getAll().enableIconFont ) {
-            return;
-        }
-
-        mkdirp('src/icons');
-        this.fs.copy(
-            this.templatePath('src/icons') + '/**/*.*',
-            this.destinationPath('src/icons')
         );
     },
 

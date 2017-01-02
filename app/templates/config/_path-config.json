@@ -1,0 +1,49 @@
+{
+  "src": "src",
+  "dev": "dist",
+  "dest": "public",
+  "dist": "build",
+
+  <% if( enablePug ) { %>
+  "pug": {
+    "src": "pug",
+    "dest": "./"
+  },
+  <% } %>
+
+  <% if( enableStaticFiles ) { %>
+  "static": {
+    "src": "static",
+    "dest": "static"
+  },
+  <% } %>
+
+  <% if( enableJavascript ) { %>
+  "javascripts": {
+    "src": "javascripts",
+    "dest": "javascripts"
+  },
+  <% } %>
+
+  <% if( enableStylesheet ) { %>
+  "stylesheets": {
+    "src": "stylesheets",
+    "dest": "stylesheets"
+  },
+  <% } %>
+
+  <% if( enableImages ) { %>
+  "images": {
+    "src": "images",
+    "dest": "images"
+  },
+  <% } %>
+
+  <% if( enableFonts ) { %>
+  "fonts": {
+    "src": "fonts",
+    "dest": "fonts"
+  },
+  <% } %>
+  "null": 0
+}

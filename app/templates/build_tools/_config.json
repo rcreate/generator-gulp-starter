@@ -105,7 +105,7 @@
     "images": {
       "src": "images",
       "dest": "images",
-      "extensions": ["jpg", "png", "svg", "gif"]
+      "extensions": '*'
     },
     <% } %>
 
@@ -113,15 +113,6 @@
     "fonts": {
       "src": "fonts",
       "dest": "fonts",
-      "extensions": ["woff2", "woff", "eot", "ttf", "svg"]
-    },
-    <% } %>
-
-    <% if( enableIconFont ) { %>
-    "iconFont": {
-      "src": "icons",
-      "dest": "fonts",
-      "sassDest": "generated",
       "extensions": ["woff2", "woff", "eot", "ttf", "svg"]
     },
     <% } %>
