@@ -43,9 +43,9 @@
   ],
   "license": "MIT",
   "main": "app/index.js",
-  "name": "generator-queo-gulp-starter",
+  "name": "generator-queo-blendid",
   "optionalDependencies": {},
-  "readme": "# generator-gulp-starter\nYoeman generator for Gulp-Starter package\n",
+  "readme": "# generator-queo-blendid\nYoeman generator for Gulp-Starter package\n",
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
