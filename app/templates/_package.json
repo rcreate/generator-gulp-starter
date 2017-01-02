@@ -21,7 +21,7 @@
     "dist-upgrade": "cd ./node_modules/queo-gulp-starter && npm run-script dist-upgrade"
   },
   "devDependencies": {
-    "queo-gulp-starter": "3.3.0"
+    "queo-gulp-starter": "3.3.1"
     <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"queo-styleguide": "0.2.0"<% } %>
   },
   "dependencies": {
