@@ -268,6 +268,13 @@ module.exports = generators.Base.extend({
         );
     },
 
+    stylelint: function () {
+        this.fs.copy(
+            this.templatePath('_stylelintrc'),
+            this.destinationPath('.stylelintrc')
+        );
+    },
+
     htaccess: function () {
         this.fs.copy(
             this.templatePath('_htaccess'),
