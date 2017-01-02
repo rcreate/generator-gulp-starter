@@ -1,2 +1,2 @@
 'use strict';
-require('styleguide/src/javascripts/styleguide');
+require('queo-styleguide/src/javascripts/styleguide');

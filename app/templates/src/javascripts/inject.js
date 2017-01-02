@@ -1,2 +1,2 @@
 'use strict';
-require('styleguide/src/javascripts/inject');
+require('queo-styleguide/src/javascripts/inject');

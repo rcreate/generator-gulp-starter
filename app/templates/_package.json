@@ -13,16 +13,16 @@
     "url": "git://code.dev.queo-group.com/git/<%= repositoryName %>"
   },
   "scripts": {
-    "development": "cd ./node_modules/gulp-starter && npm run-script development",
-    "demo": "cd ./node_modules/gulp-starter && npm run-script demo",
-    "production": "cd ./node_modules/gulp-starter && npm run-script production",
-    "dist-patch": "cd ./node_modules/gulp-starter && npm run-script dist-patch",
-    "dist-update": "cd ./node_modules/gulp-starter && npm run-script dist-update",
-    "dist-upgrade": "cd ./node_modules/gulp-starter && npm run-script dist-upgrade"
+    "development": "cd ./node_modules/queo-gulp-starter && npm run-script development",
+    "demo": "cd ./node_modules/queo-gulp-starter && npm run-script demo",
+    "production": "cd ./node_modules/queo-gulp-starter && npm run-script production",
+    "dist-patch": "cd ./node_modules/queo-gulp-starter && npm run-script dist-patch",
+    "dist-update": "cd ./node_modules/queo-gulp-starter && npm run-script dist-update",
+    "dist-upgrade": "cd ./node_modules/queo-gulp-starter && npm run-script dist-upgrade"
   },
   "devDependencies": {
-    "gulp-starter": "queoGmbH/gulp-starter#develop"
-    <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"styleguide": "queoGmbH/styleguide"<% } %>
+    "queo-gulp-starter": "3.3.0"
+    <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"queo-styleguide": "0.2.0"<% } %>
   },
   "dependencies": {
     "<%= bootstrapName %>": "<%= bootstrapVersion %>"
