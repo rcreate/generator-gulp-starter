@@ -1,7 +1,5 @@
 'use strict';
 
-var importer = require('npm-sass-require');
-
 module.exports = {
   options: {
     cleanFirst: false,
@@ -51,7 +49,7 @@ module.exports = {
     type: 'sass',
     sass: {
       indentedSyntax: false,
-      importer: importer
+      importer: require('npm-sass-require')
     },
     extensions: ['scss', 'sass'],
     <% } else { %>
