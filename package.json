@@ -3,7 +3,7 @@
     "name": "Ricardo Schmidt"
   },
   "bugs": {
-    "url": "https://github.com/rcreate/generator-gulp-starter/issues"
+    "url": "https://github.com/queoGmbH/generator-gulp-starter/issues"
   },
   "dependencies": {
     "chalk": "^1.0.0",
@@ -28,7 +28,7 @@
     "organism"
   ],
   "gitHead": "67c4c30bebbfbef8677d6e1d9ccccaaa4b177590",
-  "homepage": "https://github.com/rcreate/generator-gulp-starter#readme",
+  "homepage": "https://github.com/queoGmbH/generator-gulp-starter#readme",
   "keywords": [
     "yeoman-generator",
     "web",
@@ -43,13 +43,13 @@
   ],
   "license": "MIT",
   "main": "app/index.js",
-  "name": "generator-gulp-starter",
+  "name": "generator-queo-gulp-starter",
   "optionalDependencies": {},
   "readme": "# generator-gulp-starter\nYoeman generator for Gulp-Starter package\n",
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rcreate/generator-gulp-starter.git"
+    "url": "git+https://github.com/queoGmbH/generator-gulp-starter.git"
   },
   "scripts": {
     "test": "No tests available"
