@@ -1,9 +1,10 @@
 'use strict';
-var generators = require('yeoman-generator');
-var yosay = require('yosay');
-var chalk = require('chalk');
-var mkdirp = require('mkdirp');
-var extend = require('node.extend');
+
+const generators = require('yeoman-generator');
+const yosay = require('yosay');
+const chalk = require('chalk');
+const mkdirp = require('mkdirp');
+const extend = require('node.extend');
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -39,7 +40,7 @@ module.exports = generators.Base.extend({
           this.log(yosay('This is a starter package for your Web application. Please provide as much information about your project as you can. Your project will be available after installing all dependencies.'));
       }
 
-      var prompts = [
+      let prompts = [
           {
               type: 'input',
               name: 'appName',
@@ -87,6 +88,12 @@ module.exports = generators.Base.extend({
               name: 'enableJavascript',
               message: 'Enable Javascript processing using Babel with ES2015 support?',
               default: true
+          },
+          {
+              type: 'confirm',
+              name: 'enableTypescript',
+              message: 'Enable Typescript for your project?',
+              default: false
           },
           {
               type: 'confirm',
@@ -213,268 +220,287 @@ module.exports = generators.Base.extend({
 
   writing: {
     packageJSON: function () {
-        var answers = this.config.getAll();
-        if (answers.bootstrapVersion.indexOf('4') === 0) {
-            answers["bootstrapName"] = "bootstrap";
-        } else if (answers.bootstrapVersion.indexOf('3') === 0) {
-            answers["bootstrapName"] = "bootstrap" + ( answers.cssPreprocessor === 'less' ? '' : '-sass' );
-        }
+      let answers = this.config.getAll();
+      if (answers.bootstrapVersion.indexOf('4') === 0) {
+        answers["bootstrapName"] = "bootstrap";
+      } else if (answers.bootstrapVersion.indexOf('3') === 0) {
+        answers["bootstrapName"] = "bootstrap" + ( answers.cssPreprocessor === 'less' ? '' : '-sass' );
+      }
 
-        this.fs.copyTpl(
-            this.templatePath('_package.json'),
-            this.destinationPath('package.json'),
-            answers
-        );
+      this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'),
+        answers
+      );
     },
 
     config: function () {
-        mkdirp('config');
-        this.fs.copyTpl(
-              this.templatePath('config/_path-config.json'),
-              this.destinationPath('config/path-config.json'),
-              this.config.getAll()
-        );
-        this.fs.copyTpl(
-              this.templatePath('config/_task-config.js'),
-              this.destinationPath('config/task-config.js'),
-              this.config.getAll()
-        );
+      mkdirp('config');
+      this.fs.copyTpl(
+        this.templatePath('config/_path-config.json'),
+        this.destinationPath('config/path-config.json'),
+        this.config.getAll()
+      );
+      this.fs.copyTpl(
+        this.templatePath('config/_task-config.js'),
+        this.destinationPath('config/task-config.js'),
+        this.config.getAll()
+      );
     },
 
     git: function () {
-        this.fs.copy(
-            this.templatePath('gitignore'),
-            this.destinationPath('.gitignore')
-        );
+      this.fs.copy(
+        this.templatePath('gitignore'),
+        this.destinationPath('.gitignore')
+      );
     },
 
     editorConfig: function () {
-        this.fs.copy(
-            this.templatePath('editorconfig'),
-            this.destinationPath('.editorconfig')
-        );
+      this.fs.copy(
+        this.templatePath('editorconfig'),
+        this.destinationPath('.editorconfig')
+      );
     },
 
     eslint: function () {
-        this.fs.copy(
-            this.templatePath('_eslintrc.js'),
-            this.destinationPath('.eslintrc.js')
-        );
+      this.fs.copy(
+        this.templatePath('_eslintrc.js'),
+        this.destinationPath('.eslintrc.js')
+      );
     },
 
     stylelint: function () {
-        this.fs.copy(
-            this.templatePath('_stylelintrc'),
-            this.destinationPath('.stylelintrc')
-        );
+      this.fs.copy(
+        this.templatePath('_stylelintrc'),
+        this.destinationPath('.stylelintrc')
+      );
     },
 
     htaccess: function () {
-        this.fs.copy(
-            this.templatePath('_htaccess'),
-            this.destinationPath('.htaccess')
-        );
+      this.fs.copy(
+        this.templatePath('_htaccess'),
+        this.destinationPath('.htaccess')
+      );
     },
 
     pug: function () {
-        var answers = this.config.getAll();
-        if (!answers.enablePug) {
-            return;
-        }
+      let answers = this.config.getAll();
+      if (!answers.enablePug) {
+        return;
+      }
 
-        mkdirp('src/pug/app');
+      mkdirp('src/pug/app');
+
+      this.fs.copy(
+        this.templatePath('src/pug') + '/*.*',
+        this.destinationPath('src/pug')
+      );
+
+      this.fs.copy(
+        this.templatePath('src/pug/app') + '/**/*.*',
+        this.destinationPath('src/pug/app')
+      );
+
+      this.fs.copyTpl(
+        this.templatePath('src/pug/app/atomic/template/base.pug'),
+        this.destinationPath('src/pug/app/atomic/template/base.pug'),
+        answers
+      );
+
+      if (answers.cssPreprocessor === 'sass' && answers.enableStyleguide === true) {
+        mkdirp('src/pug/styleguide');
 
         this.fs.copy(
-            this.templatePath('src/pug') + '/*.*',
-            this.destinationPath('src/pug')
+          this.templatePath('src/pug/styleguide') + '/**/*.*',
+          this.destinationPath('src/pug/styleguide')
         );
-
-        this.fs.copy(
-            this.templatePath('src/pug/app') + '/**/*.*',
-            this.destinationPath('src/pug/app')
-        );
-
-        this.fs.copyTpl(
-            this.templatePath('src/pug/app/atomic/template/base.pug'),
-            this.destinationPath('src/pug/app/atomic/template/base.pug'),
-            answers
-        );
-
-        if( answers.cssPreprocessor === 'sass' && answers.enableStyleguide === true ) {
-            mkdirp('src/pug/styleguide');
-
-            this.fs.copy(
-                this.templatePath('src/pug/styleguide') + '/**/*.*',
-                this.destinationPath('src/pug/styleguide')
-            );
-        }
+      }
     },
 
     javascript: function () {
-        var answers = this.config.getAll();
-        if (!answers.enableJavascript) {
-            return;
-        }
+      let answers = this.config.getAll();
+      if (!answers.enableJavascript) {
+        return;
+      }
 
-        mkdirp('src/javascripts/app');
+      mkdirp('src/javascripts/app');
 
+      let scriptExtension = 'js';
+      if (answers.enableTypescript) {
+        scriptExtension = 'ts';
+      }
+      this.fs.copy(
+        this.templatePath('src/javascripts/app') + '/**/*.' + scriptExtension,
+        this.destinationPath('src/javascripts/app')
+      );
+      this.fs.copy(
+        this.templatePath('src/javascripts/app.' + scriptExtension),
+        this.destinationPath('src/javascripts/app.' + scriptExtension)
+      );
+
+      if (answers.cssPreprocessor === 'sass' && answers.enableStyleguide === true) {
         this.fs.copy(
-            this.templatePath('src/javascripts/app') + '/**/*.*',
-            this.destinationPath('src/javascripts/app')
+          this.templatePath('src/javascripts/inject.js'),
+          this.destinationPath('src/javascripts/inject.js')
         );
         this.fs.copy(
-            this.templatePath('src/javascripts/app.js'),
-            this.destinationPath('src/javascripts/app.js')
+          this.templatePath('src/javascripts/styleguide.js'),
+          this.destinationPath('src/javascripts/styleguide.js')
         );
+      }
+    },
 
-        if( answers.cssPreprocessor === 'sass' && answers.enableStyleguide === true ) {
-            this.fs.copy(
-                this.templatePath('src/javascripts/inject.js'),
-                this.destinationPath('src/javascripts/inject.js')
-            );
-            this.fs.copy(
-                this.templatePath('src/javascripts/styleguide.js'),
-                this.destinationPath('src/javascripts/styleguide.js')
-            );
-        }
+
+    typescript: function () {
+      let answers = this.config.getAll();
+      if (!answers.enableTypescript) {
+        return;
+      }
+
+      this.fs.copy(
+        this.templatePath('_tsconfig.json'),
+        this.destinationPath('tsconfig.json')
+      );
+
+
     },
 
     stylesheet: function () {
-        var answers = this.config.getAll();
+      let answers = this.config.getAll();
         if (!answers.enableStylesheet) {
-            return;
+          return;
         }
 
-        var type = answers.cssPreprocessor;
-        var ext = type;
-        if (ext === "sass") {
-            ext = "scss";
-        }
+      let type = answers.cssPreprocessor;
+      let ext = type;
+      if (ext === "sass") {
+        ext = "scss";
+      }
 
-        mkdirp('src/stylesheets/app');
+      mkdirp('src/stylesheets/app');
+
+      this.fs.copy(
+        this.templatePath('src/' + type + '/app') + '/**/*.*',
+        this.destinationPath('src/stylesheets/app')
+      );
+      this.fs.copy(
+        this.templatePath('src/' + type + '/app.' + ext),
+        this.destinationPath('src/stylesheets/app.' + ext)
+      );
+
+      if (answers.cssPreprocessor === 'sass' && answers.enableStyleguide === true) {
+        mkdirp('src/stylesheets/styleguide');
 
         this.fs.copy(
-            this.templatePath('src/' + type + '/app') + '/**/*.*',
-            this.destinationPath('src/stylesheets/app')
+          this.templatePath('src/' + type + '/styleguide') + '/**/*.*',
+          this.destinationPath('src/stylesheets/styleguide')
         );
         this.fs.copy(
-            this.templatePath('src/' + type + '/app.'+ext),
-            this.destinationPath('src/stylesheets/app.'+ext)
+          this.templatePath('src/' + type + '/inject.' + ext),
+          this.destinationPath('src/stylesheets/inject.' + ext)
+        );
+        this.fs.copy(
+          this.templatePath('src/' + type + '/styleguide.' + ext),
+          this.destinationPath('src/stylesheets/styleguide.' + ext)
+        );
+      }
+
+      this.fs.copyTpl(
+        this.templatePath('src/' + type + '/app/config/_config.' + ext),
+        this.destinationPath('src/stylesheets/app/config/_config.' + ext),
+        answers
+      );
+
+      this.fs.copyTpl(
+        this.templatePath('src/' + type + '/app/vendor/_vendor.' + ext),
+        this.destinationPath('src/stylesheets/app/vendor/_vendor.' + ext),
+        answers
+      );
+
+      let sourceFile;
+      if (answers.bootstrapVersion.indexOf('4') === 0) {
+        sourceFile = 'v' + answers.bootstrapVersion + '.' + ext;
+      } else if (answers.bootstrapVersion.indexOf('3') === 0) {
+        sourceFile = 'v3.' + ext;
+      }
+
+      if (sourceFile) {
+        this.fs.copyTpl(
+          this.templatePath('src/bootstrap/' + sourceFile),
+          this.destinationPath('src/stylesheets/app/vendor/bootstrap.' + ext),
+          answers
         );
 
-        if( answers.cssPreprocessor === 'sass' && answers.enableStyleguide === true ) {
-            mkdirp('src/stylesheets/styleguide');
-
-            this.fs.copy(
-                this.templatePath('src/' + type + '/styleguide') + '/**/*.*',
-                this.destinationPath('src/stylesheets/styleguide')
-            );
-            this.fs.copy(
-                this.templatePath('src/' + type + '/inject.'+ext),
-                this.destinationPath('src/stylesheets/inject.'+ext)
-            );
-            this.fs.copy(
-                this.templatePath('src/' + type + '/styleguide.'+ext),
-                this.destinationPath('src/stylesheets/styleguide.'+ext)
-            );
-        }
+        mkdirp('src/stylesheets/app/config/bootstrap');
 
         this.fs.copyTpl(
-            this.templatePath('src/' + type + '/app/config/_config.' + ext),
-            this.destinationPath('src/stylesheets/app/config/_config.' + ext),
-            answers
+          this.templatePath('src/bootstrap/config/_bootstrap.' + ext),
+          this.destinationPath('src/stylesheets/app/config/bootstrap/_bootstrap.' + ext),
+          answers
         );
-
-        this.fs.copyTpl(
-            this.templatePath('src/' + type + '/app/vendor/_vendor.' + ext),
-            this.destinationPath('src/stylesheets/app/vendor/_vendor.' + ext),
-            answers
-        );
-
-        var sourceFile;
-        if (answers.bootstrapVersion.indexOf('4') === 0) {
-            sourceFile = 'v' + answers.bootstrapVersion + '.' + ext;
-        } else if (answers.bootstrapVersion.indexOf('3') === 0) {
-            sourceFile = 'v3.' + ext;
-        }
-
-        if (sourceFile) {
-            this.fs.copyTpl(
-                this.templatePath('src/bootstrap/' + sourceFile),
-                this.destinationPath('src/stylesheets/app/vendor/bootstrap.' + ext),
-                answers
-            );
-
-            mkdirp('src/stylesheets/app/config/bootstrap');
-
-            this.fs.copyTpl(
-                this.templatePath('src/bootstrap/config/_bootstrap.' + ext),
-                this.destinationPath('src/stylesheets/app/config/bootstrap/_bootstrap.' + ext),
-                answers
-            );
-        }
+      }
     },
 
     images: function() {
-        if( !this.config.getAll().enableImages ) {
-            return;
-        }
+      if (!this.config.getAll().enableImages) {
+        return;
+      }
 
-        mkdirp('src/images');
-        this.fs.copy(
-            this.templatePath('src/images') + '/**/*.*',
-            this.destinationPath('src/images')
-        );
+      mkdirp('src/images');
+      this.fs.copy(
+        this.templatePath('src/images') + '/**/*.*',
+        this.destinationPath('src/images')
+      );
     },
 
     fonts: function() {
-        if( !this.config.getAll().enableFonts ) {
-            return;
-        }
+      if (!this.config.getAll().enableFonts) {
+        return;
+      }
 
-        mkdirp('src/fonts');
-        this.fs.copy(
-            this.templatePath('src/fonts') + '/**/*.*',
-            this.destinationPath('src/fonts')
-        );
+      mkdirp('src/fonts');
+      this.fs.copy(
+        this.templatePath('src/fonts') + '/**/*.*',
+        this.destinationPath('src/fonts')
+      );
     },
 
     staticFiles: function() {
-        if( !this.config.getAll().enableStaticFiles ) {
-            return;
-        }
+      if (!this.config.getAll().enableStaticFiles) {
+        return;
+      }
 
-        mkdirp('src/static');
-        this.fs.copy(
-            this.templatePath('src/static') + '/**/*.*',
-            this.destinationPath('src/static')
-        );
+      mkdirp('src/static');
+      this.fs.copy(
+        this.templatePath('src/static') + '/**/*.*',
+        this.destinationPath('src/static')
+      );
     }
   },
 
   install: function () {
-      this.installDependencies({
-          skipMessage: this.options['skip-install-message'],
-          skipInstall: this.options['skip-install'],
-          bower: false
-      });
+    this.installDependencies({
+                               skipMessage: this.options['skip-install-message'],
+                               skipInstall: this.options['skip-install'],
+                               bower: false
+                             });
   },
 
   end: function () {
-      var howToInstall =
-              '\nRun ' +
-              chalk.yellow.bold('npm install') +
-              ' to get your app running.';
+    let howToInstall =
+          '\nRun ' +
+          chalk.yellow.bold('npm install') +
+          ' to get your app running.';
 
-      if (this.options['skip-install']) {
-          this.log(howToInstall);
-          return;
-      }
+    if (this.options['skip-install']) {
+      this.log(howToInstall);
+      return;
+    }
 
-      this.log(
-          "To run your generated application execute " +
-          chalk.yellow.bold('npm run development') +
-          "."
-      );
+    this.log(
+      "To run your generated application execute " +
+      chalk.yellow.bold('npm run development') +
+      "."
+    );
   }
 });

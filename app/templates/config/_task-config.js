@@ -25,16 +25,26 @@ module.exports = {
   <% if( enableJavascript ) { %>
   javascripts: {
     entries: {
+      <% if( enableTypescript ) { %>
+      app: ['./app.ts'],
+      <% } else { %>
       app: ['./app.js'],
+      <% } %>
       <% if( cssPreprocessor === 'sass' && enableStyleguide === true ) { %>
       inject: ['./inject.js'],
       styleguide: ['./styleguide.js'],
       <% } %>
     },
-    extensions: ['js', 'json'],
+    extensions: ['js', 'json'<% if( enableTypescript ) { %>,'ts'<% } %>],
     extractSharedJs: false,
     hotModuleReplacement: true,
     deployUncompressed: true
+    <% if( enableTypescript ) { %>
+    ,developmentLoaders: [
+      { test: /\.ts$/, loader: 'ts-loader' }
+    ]
+    ,devtool: 'source-map'
+    <% } %>
   },
   <% } %>
 
