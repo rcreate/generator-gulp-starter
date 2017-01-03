@@ -85,13 +85,7 @@ module.exports = generators.Base.extend({
           {
               type: 'confirm',
               name: 'enableJavascript',
-              message: 'Enable Javascript processing?',
-              default: true
-          },
-          {
-              type: 'confirm',
-              name: 'useBabel',
-              message: 'Use ECMAScript6 compilation for Javascript sources?',
+              message: 'Enable Javascript processing using Babel with ES2015 support?',
               default: true
           },
           {
@@ -320,22 +314,6 @@ module.exports = generators.Base.extend({
         var answers = this.config.getAll();
         if (!answers.enableJavascript) {
             return;
-        }
-
-        mkdirp('loaders');
-
-        if (answers.useBabel) {
-            this.fs.copyTpl(
-                this.templatePath('loaders/babel.js'),
-                this.destinationPath('loaders/babel.js'),
-                answers
-            );
-        } else {
-            this.fs.copyTpl(
-                this.templatePath('loaders/imports.js'),
-                this.destinationPath('loaders/imports.js'),
-                answers
-            );
         }
 
         mkdirp('src/javascripts/app');
