@@ -1,11 +1,11 @@
 import $ = require('jquery');
 
-export = function($target: Object, options: Object){
-    "use strict";
+export = function(){
+  "use strict";
 
-    const init = function(){
-        console.log('Javascript is working!')
-    };
+  const init = function(){
+    console.log('Javascript is working!')
+  };
 
-    $(init)
+  $(init);
 }
