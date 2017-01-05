@@ -20,8 +20,8 @@
     "dist-upgrade": "npm explore queo-blendid -- npm run dist-upgrade"
   },
   "devDependencies": {
-    "queo-gulp-starter": "3.3.1"
-    <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"queo-styleguide": "0.2.0"<% } %>
+    "queo-gulp-starter": "^3.3.1"
+    <% if( cssPreprocessor == 'sass' && enableStyleguide === true ) { %>,"queo-styleguide": "^0.2.0"<% } %>
   },
   "dependencies": {
     "<%= bootstrapName %>": "<%= bootstrapVersion %>"
