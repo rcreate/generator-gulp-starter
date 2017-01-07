@@ -13,11 +13,11 @@
     "url": "git://code.dev.queo-group.com/git/<%= repositoryName %>"
   },
   "scripts": {
-    "development": "npm explore queo-gulp-starter -- npm run development",
-    "production": "npm explore queo-gulp-starter -- npm run build",
-    "dist-patch": "npm explore queo-gulp-starter -- npm run dist-patch",
-    "dist-update": "npm explore queo-gulp-starter -- npm run dist-update",
-    "dist-upgrade": "npm explore queo-gulp-starter -- npm run dist-upgrade"
+    "development": "blendid -- default",
+    "production": "blendid -- build",
+    "dist-patch": "blendid -- dist-update && blendid -- tag:patch",
+    "dist-update": "blendid -- dist-update && blendid -- tag:minor",
+    "dist-upgrade": "blendid -- dist-update && blendid -- tag:major"
   },
   "devDependencies": {
     "queo-gulp-starter": "^3.3.1"
