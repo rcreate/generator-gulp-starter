@@ -13,12 +13,11 @@
     "url": "git://code.dev.queo-group.com/git/<%= repositoryName %>"
   },
   "scripts": {
-    "development": "cd ./node_modules/queo-blendid && npm run-script development",
-    "demo": "cd ./node_modules/queo-blendid && npm run-script demo",
-    "production": "cd ./node_modules/queo-blendid && npm run-script production",
-    "dist-patch": "cd ./node_modules/queo-blendid && npm run-script dist-patch",
-    "dist-update": "cd ./node_modules/queo-blendid && npm run-script dist-update",
-    "dist-upgrade": "cd ./node_modules/queo-blendid && npm run-script dist-upgrade"
+    "development": "blendid -- default",
+    "production": "blendid -- build",
+    "dist-patch": "blendid -- dist-update && blendid -- tag:patch",
+    "dist-update": "blendid -- dist-update && blendid -- tag:minor",
+    "dist-upgrade": "blendid -- dist-update && blendid -- tag:major"
   },
   "devDependencies": {
     "queo-blendid": "^4.1.4",
