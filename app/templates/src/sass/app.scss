@@ -1,8 +1,10 @@
+// project variables
+@import "app/config/config";
+
 // vendor styles
 @import "app/vendor/vendor";
 
-// predefined variables and mixins
-@import "app/config/config";
+// additional mixins
 @import "app/mixins/mixins";
 
 // styles for all atomic elements
