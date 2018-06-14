@@ -123,6 +123,10 @@ module.exports = generators.Base.extend({
               message: 'Which version of Bootstrap do you want to use?',
               choices: [
                   {
+                      name: 'Bootstrap 4.1.1',
+                      value: '4.1.1'
+                  },
+                  {
                       name: 'Bootstrap 4 alpha4',
                       value: '4.0.0-alpha.4'
                   },
@@ -135,7 +139,7 @@ module.exports = generators.Base.extend({
                       value: false
                   }
               ],
-              default: '4.0.0-alpha.4'
+              default: '4.1.1'
           },
           {
               type: 'confirm',
