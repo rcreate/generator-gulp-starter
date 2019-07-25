@@ -1,5 +1,7 @@
 'use strict';
 
+let path = require('path');
+
 module.exports = {
   options: {
     cleanFirst: false,
@@ -37,11 +39,25 @@ module.exports = {
     },
     extensions: ['js', 'json'<% if( enableTypescript ) { %>,'ts'<% } %>],
     extractSharedJs: false,
+    provide: {
+      '$': 'jquery',
+      'jQuery': 'jquery',
+      'window.jQuery': 'jquery'
+    },
+    babelLoader: {
+      exclude: null,
+      include: [
+        path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.javascripts.src),
+        path.resolve(process.env.PWD, 'node_modules/jquery/'),
+        path.resolve(process.env.PWD, 'node_modules/jquery-ui/ui/'),
+        path.resolve(process.env.PWD, 'node_modules/bootstrap'),
+      ]
+    },
     hotModuleReplacement: true,
     deployUncompressed: true
     <% if( enableTypescript ) { %>
     ,developmentLoaders: [
-      { test: /\.ts$/, loader: 'ts-loader' }
+      { test: /\.ts$/, exclude: /node_modules/, loader: 'ts-loader' }
     ]
     ,devtool: 'source-map'
     <% } %>

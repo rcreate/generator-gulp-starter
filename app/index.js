@@ -225,10 +225,14 @@ module.exports = generators.Base.extend({
   writing: {
     packageJSON: function () {
       let answers = this.config.getAll();
-      if (answers.bootstrapVersion.indexOf('4') === 0) {
-        answers["bootstrapName"] = "bootstrap";
-      } else if (answers.bootstrapVersion.indexOf('3') === 0) {
-        answers["bootstrapName"] = "bootstrap" + ( answers.cssPreprocessor === 'less' ? '' : '-sass' );
+      answers["bootstrapName"] = null;
+
+      if ( answers.bootstrapVersion ) {
+          if (answers.bootstrapVersion.indexOf('4') === 0) {
+              answers["bootstrapName"] = "bootstrap";
+          } else if (answers.bootstrapVersion.indexOf('3') === 0) {
+              answers["bootstrapName"] = "bootstrap" + (answers.cssPreprocessor === 'less' ? '' : '-sass');
+          }
       }
 
       this.fs.copyTpl(
@@ -277,13 +281,6 @@ module.exports = generators.Base.extend({
       this.fs.copy(
         this.templatePath('_stylelintrc'),
         this.destinationPath('.stylelintrc')
-      );
-    },
-
-    htaccess: function () {
-      this.fs.copy(
-        this.templatePath('_htaccess'),
-        this.destinationPath('.htaccess')
       );
     },
 
@@ -421,14 +418,15 @@ module.exports = generators.Base.extend({
         answers
       );
 
-      let sourceFile;
-      if (answers.bootstrapVersion.indexOf('4') === 0) {
-        sourceFile = 'v' + answers.bootstrapVersion + '.' + ext;
-      } else if (answers.bootstrapVersion.indexOf('3') === 0) {
-        sourceFile = 'v3.' + ext;
-      }
+      if (answers.bootstrapVersion) {
+        let sourceFile;
 
-      if (sourceFile) {
+        if (answers.bootstrapVersion.indexOf('4') === 0) {
+          sourceFile = 'v' + answers.bootstrapVersion + '.' + ext;
+        } else if (answers.bootstrapVersion.indexOf('3') === 0) {
+          sourceFile = 'v3.' + ext;
+        }
+
         this.fs.copyTpl(
           this.templatePath('src/bootstrap/' + sourceFile),
           this.destinationPath('src/stylesheets/app/vendor/bootstrap.' + ext),
