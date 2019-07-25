@@ -43,7 +43,7 @@
   ],
   "license": "MIT",
   "main": "app/index.js",
-  "name": "generator-rblendid",
+  "name": "generator-blendid",
   "optionalDependencies": {},
   "readmeFilename": "README.md",
   "repository": {
